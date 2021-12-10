@@ -186,8 +186,8 @@ input[type=email]:placeholder {
 .green{
   background-color: rgba(123, 255, 0, 0.245);
   border:1px solid rgba(60, 238, 6, 0.813);
-  min-height: 300px;
-  padding-top:20%;
+  min-height: 100px;
+  padding:20% 3%;
   font-size: 18px;
 }
 .green span{
