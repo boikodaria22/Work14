@@ -24,7 +24,7 @@ let body = document.querySelector('body');
 let message = document.createElement('div')
 message.className = 'message'
 body.appendChild(message)
-//Get
+  //Get
 let response = []
 async function getUsers() {
   let resp
@@ -47,16 +47,30 @@ async function postUsers() {
     }),
   })).json())
 }
-
 const signUp = document.getElementById('btn-sign-up')
 const loginSignUp = document.getElementById('login-sign-up')
 const passwordSignUp = document.getElementById('password-sign-up')
 const checkPasswordSignUp = document.getElementById('check-password-sign-up')
-
-
-
 signIn.onclick = () => {
-      function createMessage() {
+  function createMessage() {
+    if (response.length === 0) {
+      if (message) message.innerHTML = ' '
+      message.innerHTML = 'Not existing login'
+      message.className = 'red'
+    }
+    if (!loginSignIn.value.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )) {
+      if (message.hidden = true) message.hidden = false
+      if (message) {
+        message.innerHTML = ' '
+        message.innerHTML = `Your email have to enter in format 'test@gmail.ru'`
+        message.className = 'red'
+      }
+    } else {
+      if (loginSignIn.value.match(
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )) {
         for (let i = 0; i < response.length; i++) {
           if (message.hidden = true) message.hidden = false
           if (response[i].login === loginSignIn.value.toLowerCase()) {
@@ -79,62 +93,86 @@ signIn.onclick = () => {
             message.className = 'red'
           }
         }
+      } else {
+        if (message.hidden = true) message.hidden = false
+        if (message) {
+          message.innerHTML = ' '
+          message.innerHTML = `Your email have to enter in format 'test@gmail.ru'`
+          message.className = 'red'
+        }
       }
-      getUsers()
-      createMessage()
-      
+    }
   }
-
-
+  getUsers()
+  createMessage()
+}
 getUsers()
 signUp.onclick = () => {
-  function registr() {
-    let answer
-    if (message.hidden = true) message.hidden = false
-    for (let i = 0; i < response.length; i++) {
-      if (response[i].login === loginSignUp.value.toLowerCase()) {
-        answer = 0
-        if (message){
-          message.innerHTML = ' '
-        message.innerHTML = `User with this login exists`
-        message.className = 'red'}
-      }
-      
+  let valid
+  const validateEmail = (loginSignUp) => {
+    if (loginSignUp.value.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )) {
+      valid = 'true'
     }
-    if (!loginSignUp.value) {
-      if (message)
-        message.innerHTML = ' '
-      message.innerHTML = `Please enter login`
-      message.className = 'red'
-    }
-    if (!passwordSignUp.value) {
-      if (message)
-        message.innerHTML = ' '
-      message.innerHTML = `Please enter your password`
-      message.className = 'red'
-    }
-    if (!checkPasswordSignUp.value) {
-      if (message)
-        message.innerHTML = ' '
-      message.innerHTML = `Please enter your password again`
-      message.className = 'yellow'
-    }
-    if (passwordSignUp.value !== checkPasswordSignUp.value) {
-      if (message)
-        message.innerHTML = ' '
-      message.innerHTML = `You entered different passwords. Please edit them and try again`
-      message.className = 'yellow'
-    }
-if(answer!==0){
-    if(checkPasswordSignUp.value===passwordSignUp.value&&checkPasswordSignUp.value&&passwordSignUp.value&&loginSignUp.value){
-       if (message) {
-          message.innerHTML = ''
-          message.innerHTML = `You are registered successfully. Your login <span>${loginSignUp.value}<span>`
-           message.className = 'green-sign-up'
-           postUsers() 
-        } 
-      }
-    } 
   }
-  registr()
+  validateEmail(loginSignUp)
+  if (valid === 'true') {
+    function registr() {
+      let answer
+      if (message.hidden = true) message.hidden = false
+      for (let i = 0; i < response.length; i++) {
+        if (response[i].login === loginSignUp.value.toLowerCase()) {
+          answer = 0
+          if (message) {
+            message.innerHTML = ' '
+            message.innerHTML = `User with this login exists`
+            message.className = 'red'
+          }
+        }
+      }
+      if (!loginSignUp.value) {
+        if (message)
+          message.innerHTML = ' '
+        message.innerHTML = `Please enter login`
+        message.className = 'red'
+      }
+      if (!passwordSignUp.value) {
+        if (message)
+          message.innerHTML = ' '
+        message.innerHTML = `Please enter your password`
+        message.className = 'red'
+      }
+      if (!checkPasswordSignUp.value) {
+        if (message)
+          message.innerHTML = ' '
+        message.innerHTML = `Please enter your password again`
+        message.className = 'yellow'
+      }
+      if (passwordSignUp.value !== checkPasswordSignUp.value) {
+        if (message)
+          message.innerHTML = ' '
+        message.innerHTML = `You entered different passwords. Please edit them and try again`
+        message.className = 'yellow'
+      }
+      if (answer !== 0) {
+        if (checkPasswordSignUp.value === passwordSignUp.value && checkPasswordSignUp.value && passwordSignUp.value && loginSignUp.value) {
+          if (message) {
+            message.innerHTML = ''
+            message.innerHTML = `You are registered successfully. Your login <span>${loginSignUp.value}<span>`
+            message.className = 'green-sign-up'
+            postUsers()
+          }
+        }
+      }
+    }
+    registr()
+  } else {
+    if (message.hidden = true) message.hidden = false
+    if (message) {
+      message.innerHTML = ' '
+      message.innerHTML = `Please, enter your email in format 'test@gmail.ru'`
+      message.className = 'red'
+    }
+  }
 }
