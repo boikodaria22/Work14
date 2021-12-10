@@ -1,7 +1,33 @@
-const tabs = document.getElementById('tabs')
-const buttons = Array.from(tabs.getElementsByClassName('tabs_button'))
-const target = Array.from(document.getElementsByClassName('tab_content'))
-  //переключение между вкладками
+//======================= Общие функции =====================================
+function getDomElementsById(id){
+  return document.getElementById(id)
+}
+
+function getDomElementsByClass(place,className){
+  return place.getElementsByClassName(className)
+}
+
+function getDomElementsByQuerySelector(selector){
+ return document.querySelector(selector)
+}
+
+function createDomElements(element){
+ return document.createElement(element)
+}
+
+function createMessagesForCheck(text, color){
+ if (message.hidden = true) message.hidden = false
+ if (message) {
+   message.innerHTML = ' '
+   message.innerHTML = text
+   message.className = color
+ }
+}
+//========================  Navigation Elements Dom =======================
+const tabs = getDomElementsById('tabs')
+const buttons = Array.from(getDomElementsByClass(tabs,'tabs_button'))
+const target = Array.from(getDomElementsByClass(document,'tab_content'))
+//========================  TABS Change ====================================
 function change(array, i) {
   array.forEach(element => {
     element.forEach(i => {
@@ -16,15 +42,15 @@ for (let i = 0; i < buttons.length; i++) {
     message.hidden = true
   }
 };
-//sign in
-const signIn = document.getElementById('btn-sign-in')
-const loginSignIn = document.getElementById('login-sign-in')
-const passwordSignIn = document.getElementById('password-sign-in')
-let body = document.querySelector('body');
-let message = document.createElement('div')
+//========================  Sign In Elements Dom =======================
+const signIn =  getDomElementsById('btn-sign-in')
+const loginSignIn =  getDomElementsById('login-sign-in')
+const passwordSignIn =  getDomElementsById('password-sign-in')
+let body = getDomElementsByQuerySelector('body')
+let message =createDomElements('div')
 message.className = 'message'
 body.appendChild(message)
-  //Get
+//========================  GET ========================================
 let response = []
 async function getUsers() {
   let resp
@@ -33,7 +59,7 @@ async function getUsers() {
     response.push(resp[i])
   }
 }
-// post
+//======================== POST ========================================
 let resp
 async function postUsers() {
   resp = await ((await fetch('http://localhost:3000/users', {
@@ -47,59 +73,38 @@ async function postUsers() {
     }),
   })).json())
 }
-const signUp = document.getElementById('btn-sign-up')
-const loginSignUp = document.getElementById('login-sign-up')
-const passwordSignUp = document.getElementById('password-sign-up')
-const checkPasswordSignUp = document.getElementById('check-password-sign-up')
+//========================  Sign Up Elements Dom =======================
+const signUp = getDomElementsById('btn-sign-up')
+const loginSignUp = getDomElementsById('login-sign-up')
+const passwordSignUp = getDomElementsById('password-sign-up')
+const checkPasswordSignUp = getDomElementsById('check-password-sign-up')
+
+const validateString = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ 
+//========================  Sign In Events ===========================
 signIn.onclick = () => {
   function createMessage() {
     if (response.length === 0) {
-      if (message) message.innerHTML = ' '
-      message.innerHTML = 'Not existing login'
-      message.className = 'red'
+      createMessagesForCheck('Not existing login', 'red')
     }
-    if (!loginSignIn.value.match(
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )) {
-      if (message.hidden = true) message.hidden = false
-      if (message) {
-        message.innerHTML = ' '
-        message.innerHTML = `Your email have to enter in format 'test@gmail.ru'`
-        message.className = 'red'
-      }
+    if (!loginSignIn.value.match(validateString)) {
+      createMessagesForCheck(`Your email have to enter in format 'test@gmail.ru'`, 'red')
     } else {
-      if (loginSignIn.value.match(
-          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        )) {
+      if (loginSignIn.value.match(validateString)) {
         for (let i = 0; i < response.length; i++) {
           if (message.hidden = true) message.hidden = false
           if (response[i].login === loginSignIn.value.toLowerCase()) {
             if (response[i].password === passwordSignIn.value) {
               tabs.hidden = 'hidden'
-              if (message)
-                message.innerHTML = ' '
-              message.innerHTML = `Congratulations! You have successfully logged in as user <span>${loginSignIn.value}</span>`
-              message.className = 'green'
+              createMessagesForCheck(`Congratulations! You have successfully logged in as user <span>${loginSignIn.value}</span>`, 'green')
             } else {
-              if (message)
-                message.innerHTML = ' '
-              message.innerHTML = 'Wrong password. Try again!'
-              message.className = 'yellow'
+              createMessagesForCheck('Wrong password. Try again!', 'yellow')
             }
           } else {
-            if (message)
-              message.innerHTML = ' '
-            message.innerHTML = 'Not existing login'
-            message.className = 'red'
+            createMessagesForCheck('Not existing login', 'red')
           }
         }
       } else {
-        if (message.hidden = true) message.hidden = false
-        if (message) {
-          message.innerHTML = ' '
-          message.innerHTML = `Your email have to enter in format 'test@gmail.ru'`
-          message.className = 'red'
-        }
+        createMessagesForCheck( `Your email have to enter in format 'test@gmail.ru'`, 'red')
       }
     }
   }
@@ -107,12 +112,11 @@ signIn.onclick = () => {
   createMessage()
 }
 getUsers()
+//========================  Sign UP Events ===========================
 signUp.onclick = () => {
   let valid
   const validateEmail = (loginSignUp) => {
-    if (loginSignUp.value.match(
-        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      )) {
+    if (loginSignUp.value.match(validateString)) {
       valid = 'true'
     }
   }
@@ -124,55 +128,30 @@ signUp.onclick = () => {
       for (let i = 0; i < response.length; i++) {
         if (response[i].login === loginSignUp.value.toLowerCase()) {
           answer = 0
-          if (message) {
-            message.innerHTML = ' '
-            message.innerHTML = `User with this login exists`
-            message.className = 'red'
-          }
+          createMessagesForCheck('User with this login exists', 'red')
         }
       }
       if (!loginSignUp.value) {
-        if (message)
-          message.innerHTML = ' '
-        message.innerHTML = `Please enter login`
-        message.className = 'red'
+        createMessagesForCheck('Please enter login', 'red')
       }
       if (!passwordSignUp.value) {
-        if (message)
-          message.innerHTML = ' '
-        message.innerHTML = `Please enter your password`
-        message.className = 'red'
+        createMessagesForCheck('Please enter your password', 'red')
       }
       if (!checkPasswordSignUp.value) {
-        if (message)
-          message.innerHTML = ' '
-        message.innerHTML = `Please enter your password again`
-        message.className = 'yellow'
+        createMessagesForCheck('Please enter your password again', 'yellow')
       }
       if (passwordSignUp.value !== checkPasswordSignUp.value) {
-        if (message)
-          message.innerHTML = ' '
-        message.innerHTML = `You entered different passwords. Please edit them and try again`
-        message.className = 'yellow'
+        createMessagesForCheck('You entered different passwords. Please edit them and try again.', 'yellow')
       }
       if (answer !== 0) {
         if (checkPasswordSignUp.value === passwordSignUp.value && checkPasswordSignUp.value && passwordSignUp.value && loginSignUp.value) {
-          if (message) {
-            message.innerHTML = ''
-            message.innerHTML = `You are registered successfully. Your login <span>${loginSignUp.value}<span>`
-            message.className = 'green-sign-up'
-            postUsers()
-          }
+          createMessagesForCheck(`You are registered successfully. Your login <span>${loginSignUp.value}<span>`, 'green-sign-up')
+          postUsers()
         }
       }
     }
     registr()
   } else {
-    if (message.hidden = true) message.hidden = false
-    if (message) {
-      message.innerHTML = ' '
-      message.innerHTML = `Please, enter your email in format 'test@gmail.ru'`
-      message.className = 'red'
-    }
+    createMessagesForCheck(`Please, enter your email in format 'test@gmail.ru'`, 'red')
   }
 }
