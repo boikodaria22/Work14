@@ -101,7 +101,7 @@ input[type=button]:active, input[type=submit]:active  {
   transform: scale(0.95);
 }
 
-input[type=text],input[type=password] {
+input[type=email],input[type=password] {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -122,12 +122,12 @@ input[type=text],input[type=password] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus, input[type=password]:focus{
+input[type=email]:focus, input[type=password]:focus{
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder {
+input[type=email]:placeholder {
   color: #cccccc;
 }
 
@@ -186,7 +186,7 @@ input[type=text]:placeholder {
 }
 
 .red,.green,.yellow{
-  width: 80%;
+  width: 50%;
   text-align:center;
   padding: 20px;
   margin:20px auto;
@@ -215,7 +215,7 @@ input[type=text]:placeholder {
   padding:3%;
   font-size: 18px;
   margin:2% auto;
-  width: 90%;
+  width: 50%;
   border-radius: 10px;
   text-align: center;
 
@@ -239,6 +239,9 @@ span{
    width: 80%;
    margin: 0 10% 0 10%;
  }
+ .red,.yellow,.green,.green-sign-up{
+  width: 80%;
+}
 }
 @media (max-width: 425px) {
   .tabs_navigation {
@@ -254,11 +257,14 @@ span{
     padding: 10px 40px;
     margin-top: 30px;
   }
-  input[type=text],input[type=password] {
+  input[type=email],input[type=password] {
     padding: 7px 16px;
     margin: 5px;
     width: 90%;
   
+  }
+  .red,.yellow,.green,.green-sign-up{
+    width: 90%;
   }
  }
  
