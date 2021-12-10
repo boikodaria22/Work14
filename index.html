@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="bootstrap-grid.min.css">
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Home Work 14</title>
+</head>
+<body>
+  <div class = 'conteiner'>
+    <div id="tabs">
+      <div class="tabs_navigation row text-center">
+        <button class="tabs_button col-6 text-white btn-primary active ">Sign In</button>
+        <button class="tabs_button col-6 text-white btn-primary">Sign Up</button>
+      </div>
+      <div class="tabs_content" id="tabs_content">
+        <!--====================== Sign In ===========================-->
+        <div class="text-center tab_content wrapper active" id="Sign-In">
+          <form>
+            <input type="text" id="login-sign-in" class="fadeIn first" name="login" placeholder="Login">
+            <input type="text" id="password-sign-in" class="fadeIn second" name="login" placeholder="Password">
+            <input type="button" class="fadeIn third" value="Sign In" id='btn-sign-in'>
+          </form>
+        </div>
+        <!--====================== Sign Up ===========================-->
+        <div class="text-center tab_content wrapper" id="Sign-Up">
+          <form>
+            <input type="text" id="login-sign-up" class="fadeIn first" name="registr" placeholder="Login">
+            <input type="text" id="password-sign-up" class="fadeIn second" name="registr" placeholder="Password">
+            <input type="text" id="check-password-sign-up" class="fadeIn third" name="registr" placeholder="Repeated password">
+            <input type="button" class="fadeIn fourth" value="Sign Up" id='btn-sign-up'>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
