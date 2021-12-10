@@ -1,33 +1,33 @@
 //======================= Общие функции =====================================
-function getDomElementsById(id){
+function getDomElementsById(id) {
   return document.getElementById(id)
 }
 
-function getDomElementsByClass(place,className){
+function getDomElementsByClass(place, className) {
   return place.getElementsByClassName(className)
 }
 
-function getDomElementsByQuerySelector(selector){
- return document.querySelector(selector)
+function getDomElementsByQuerySelector(selector) {
+  return document.querySelector(selector)
 }
 
-function createDomElements(element){
- return document.createElement(element)
+function createDomElements(element) {
+  return document.createElement(element)
 }
 
-function createMessagesForCheck(text, color){
- if (message.hidden = true) message.hidden = false
- if (message) {
-   message.innerHTML = ' '
-   message.innerHTML = text
-   message.className = color
- }
+function createMessagesForCheck(text, color) {
+  if (message.hidden = true) message.hidden = false
+  if (message) {
+    message.innerHTML = ' '
+    message.innerHTML = text
+    message.className = color
+  }
 }
 //========================  Navigation Elements Dom =======================
 const tabs = getDomElementsById('tabs')
-const buttons = Array.from(getDomElementsByClass(tabs,'tabs_button'))
-const target = Array.from(getDomElementsByClass(document,'tab_content'))
-//========================  TABS Change ====================================
+const buttons = Array.from(getDomElementsByClass(tabs, 'tabs_button'))
+const target = Array.from(getDomElementsByClass(document, 'tab_content'))
+  //========================  TABS Change ====================================
 function change(array, i) {
   array.forEach(element => {
     element.forEach(i => {
@@ -43,14 +43,14 @@ for (let i = 0; i < buttons.length; i++) {
   }
 };
 //========================  Sign In Elements Dom =======================
-const signIn =  getDomElementsById('btn-sign-in')
-const loginSignIn =  getDomElementsById('login-sign-in')
-const passwordSignIn =  getDomElementsById('password-sign-in')
+const signIn = getDomElementsById('btn-sign-in')
+const loginSignIn = getDomElementsById('login-sign-in')
+const passwordSignIn = getDomElementsById('password-sign-in')
 let body = getDomElementsByQuerySelector('body')
-let message =createDomElements('div')
+let message = createDomElements('div')
 message.className = 'message'
 body.appendChild(message)
-//========================  GET ========================================
+  //========================  GET ========================================
 let response = []
 async function getUsers() {
   let resp
@@ -78,33 +78,43 @@ const signUp = getDomElementsById('btn-sign-up')
 const loginSignUp = getDomElementsById('login-sign-up')
 const passwordSignUp = getDomElementsById('password-sign-up')
 const checkPasswordSignUp = getDomElementsById('check-password-sign-up')
-
-const validateString = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ 
-//========================  Sign In Events ===========================
+const validateString = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  //========================  Sign In Events ===========================
 signIn.onclick = () => {
   function createMessage() {
-    if (response.length === 0) {
+    if (!response.length) {
       createMessagesForCheck('Not existing login', 'red')
-    }
-    if (!loginSignIn.value.match(validateString)) {
-      createMessagesForCheck(`Your email have to enter in format 'test@gmail.ru'`, 'red')
     } else {
-      if (loginSignIn.value.match(validateString)) {
-        for (let i = 0; i < response.length; i++) {
-          if (message.hidden = true) message.hidden = false
-          if (response[i].login === loginSignIn.value.toLowerCase()) {
-            if (response[i].password === passwordSignIn.value) {
-              tabs.hidden = 'hidden'
-              createMessagesForCheck(`Congratulations! You have successfully logged in as user <span>${loginSignIn.value}</span>`, 'green')
-            } else {
-              createMessagesForCheck('Wrong password. Try again!', 'yellow')
-            }
-          } else {
-            createMessagesForCheck('Not existing login', 'red')
-          }
-        }
+      if (!loginSignIn.value.match(validateString)) {
+        createMessagesForCheck(`Your email have to enter in format 'test@gmail.ru'`, 'red')
       } else {
-        createMessagesForCheck( `Your email have to enter in format 'test@gmail.ru'`, 'red')
+        if (loginSignIn.value.match(validateString)) {
+          if (message.hidden = true) message.hidden = false
+          for (let i = 0; i < response.length; ++i) {
+            if (response[i].login === loginSignIn.value.toLowerCase()) {
+              if (response[i].password === passwordSignIn.value) {
+                tabs.hidden = 'hidden'
+                createMessagesForCheck(`Congratulations! You have successfully logged in as user <span>${loginSignIn.value}</span>`, 'green')
+              } else {
+                createMessagesForCheck('Wrong password. Try again!', 'yellow')
+              }
+            } else {
+              if (response[0].login === loginSignIn.value.toLowerCase() && response[i].password === passwordSignIn.value) {
+                tabs.hidden = 'hidden'
+                createMessagesForCheck(`Congratulations! You have successfully logged in as user <span>${loginSignIn.value}</span>`, 'green')
+              } else {
+                if (message.hidden = true) message.hidden = false
+                if (message) {
+                  message.innerHTML = ' '
+                  message.innerHTML = 'Not existing login'
+                  message.className = 'red'
+                }
+              }
+            }
+          }
+        } else {
+          createMessagesForCheck(`Your email have to enter in format 'test@gmail.ru'`, 'red')
+        }
       }
     }
   }
@@ -112,7 +122,7 @@ signIn.onclick = () => {
   createMessage()
 }
 getUsers()
-//========================  Sign UP Events ===========================
+  //========================  Sign UP Events ===========================
 signUp.onclick = () => {
   let valid
   const validateEmail = (loginSignUp) => {
