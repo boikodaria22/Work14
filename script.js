@@ -103,12 +103,7 @@ signIn.onclick = () => {
                 tabs.hidden = 'hidden'
                 createMessagesForCheck(`Congratulations! You have successfully logged in as user <span>${loginSignIn.value}</span>`, 'green')
               } else {
-                if (message.hidden = true) message.hidden = false
-                if (message) {
-                  message.innerHTML = ' '
-                  message.innerHTML = 'Not existing login'
-                  message.className = 'red'
-                }
+                createMessagesForCheck('Not existing login', 'red')
               }
             }
           }
