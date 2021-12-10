@@ -1,6 +1,3 @@
-
-/* BASIC */
-
 html {
   background-color: white;
 }
@@ -26,10 +23,6 @@ h2 {
   margin: 40px 8px 10px 8px; 
   color: #cccccc;
 }
-
-
-
-/* STRUCTURE */
 .tabs_navigation {
   max-width: 50%;
   margin: auto;
@@ -63,9 +56,6 @@ h2 {
   border-radius: 0 0 10px 10px;
   border: 1px solid rgba(128, 128, 128, 0.327);
 }
-
-
-
 input[type=button], input[type=submit]{
   background-color: #56baed;
   border: 1px solid rgba(128, 128, 128, 0.327);
@@ -86,13 +76,10 @@ input[type=button], input[type=submit]{
   -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
   margin-top: 50px;
-
 }
-
 input[type=button]:hover, input[type=submit]:hover {
   background-color: #39ace7;
 }
-
 input[type=button]:active, input[type=submit]:active  {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
@@ -100,7 +87,6 @@ input[type=button]:active, input[type=submit]:active  {
   -ms-transform: scale(0.95);
   transform: scale(0.95);
 }
-
 input[type=email],input[type=password] {
   background-color: #f6f6f6;
   border: none;
