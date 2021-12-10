@@ -249,8 +249,12 @@ span{
     width: 90%;
   
   }
-  .red,.yellow,.green,.green-sign-up{
+   .red,.yellow,.green,.green-sign-up{
     width: 90%;
+    font-size: 13px;
+  }
+  .green span{
+    font-weight: 600;
   }
  }
  
