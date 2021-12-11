@@ -86,7 +86,7 @@ signIn.onclick = () => {
       createMessagesForCheck('Not existing login', 'red')
     } else {
       if (!loginSignIn.value.match(validateString)) {
-        createMessagesForCheck(`Your email have to enter in format 'test@gmail.ru'`, 'red')
+        createMessagesForCheck(`Your email have to enter in format 'test@gmail.com'`, 'red')
       } else {
         if (loginSignIn.value.match(validateString)) {
           if (message.hidden = true) message.hidden = false
@@ -108,7 +108,7 @@ signIn.onclick = () => {
             }
           }
         } else {
-          createMessagesForCheck(`Your email have to enter in format 'test@gmail.ru'`, 'red')
+          createMessagesForCheck(`Your email have to enter in format 'test@gmail.com'`, 'red')
         }
       }
     }
@@ -157,6 +157,6 @@ signUp.onclick = () => {
     }
     registr()
   } else {
-    createMessagesForCheck(`Please, enter your email in format 'test@gmail.ru'`, 'red')
+    createMessagesForCheck(`Please, enter your email in format 'test@gmail.com'`, 'red')
   }
 }
