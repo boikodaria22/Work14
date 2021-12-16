@@ -142,10 +142,10 @@ signUp.onclick = () => {
       if (!passwordSignUp.value) {
         createMessagesForCheck('Please enter your password', 'red')
       }
-      if (passwordSignUp.value&&!checkPasswordSignUp.value) {
+      if (passwordSignUp.value && !checkPasswordSignUp.value) {
         createMessagesForCheck('Please enter your password again', 'yellow')
       }
-      if (passwordSignUp.value&&checkPasswordSignUp.value&&passwordSignUp.value !== checkPasswordSignUp.value) {
+      if (passwordSignUp.value && checkPasswordSignUp.value && passwordSignUp.value !== checkPasswordSignUp.value) {
         createMessagesForCheck('You entered different passwords. Please edit them and try again.', 'yellow')
       }
       if (answer !== 0) {
